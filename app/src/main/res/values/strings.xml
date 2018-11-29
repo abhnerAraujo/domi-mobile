@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Domi</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_email">email</string>
+    <string name="hint_senha">senha</string>
+    <string name="btn_entrar">Entrar</string>
+    <string name="btn_quero_cadastrar">Quero me cadastrar</string>
+</resources>

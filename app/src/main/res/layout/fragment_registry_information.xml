@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".fragments.RegistryInformationFragment">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:fontFamily="@font/damion_regular"
+            android:textColor="#fff"
+            android:textSize="80sp"
+            android:textAlignment="center" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reg_antes_comecar"
+            android:layout_marginEnd="30sp"
+            android:layout_marginStart="30sp"
+            android:layout_marginTop="50dp"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:id="@+id/tvw_information"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_continuar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp"
+        android:id="@+id/btn_inicio_continuar"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

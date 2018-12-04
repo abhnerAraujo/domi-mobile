@@ -8,8 +8,6 @@ interface SplashScreenContract {
     }
 
     interface MainView{
-        fun showProgress()
-        fun hideProgress()
         fun sendToLoginActivity(message: String?)
         fun sendToMainActivity()
         fun onResponseFailure(throwable: Throwable)

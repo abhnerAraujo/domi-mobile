@@ -8,6 +8,20 @@
     tools:context=".LoginActivity"
     android:background="@color/colorPrimary">
 
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress_bar_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mpb_indeterminateTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:indeterminate="true"
+        app:mpb_progressStyle="horizontal"
+        android:visibility="gone"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,7 +84,8 @@
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:textColor="@color/white"
             android:text="@string/btn_entrar"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:id="@+id/btn_entrar"/>
 
     </LinearLayout>
 
@@ -83,5 +98,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/btn_quero_cadastrar"
         android:text="@string/btn_quero_cadastrar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

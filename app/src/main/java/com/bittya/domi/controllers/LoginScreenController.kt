@@ -7,7 +7,7 @@ import com.bittya.domi.models.LoginResponse
 
 class LoginScreenController(private var login_screen: LoginScreenContract.LoginView, private var authIntractor: AuthContract.GetAuthIntractor)
     : AuthContract.GetAuthIntractor.OnFinishedLoginListener
-        , LoginScreenContract.presenter {
+        , LoginScreenContract.Presenter {
 
     override fun onLoginFinished(loginResponse: ArrayList<LoginResponse>) {
         if(loginResponse.size > 0){

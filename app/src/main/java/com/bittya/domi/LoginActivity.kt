@@ -1,11 +1,20 @@
 package com.bittya.domi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Toast
+import com.bittya.domi.contracts.AuthContract
 import com.bittya.domi.contracts.LoginScreenContract
+import com.bittya.domi.controllers.LoginScreenController
+import com.bittya.domi.models.LoginRequest
+import com.bittya.domi.services.intractors.AuthIntractor
+import com.bittya.domi.services.local.ConnectionService
+import com.bittya.domi.services.local.PreferencesService
 import com.bittya.domi.utils.Validacoes
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_login.*
@@ -31,18 +40,39 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         })
+
+        PreferencesService(this).getStringSharedPreferenceByTag(resources.getString(R.string.token))
+        btn_entrar.setOnClickListener {
+            showProgress()
+            if(ConnectionService.test(this)){
+                val controller = LoginScreenController(this, AuthIntractor())
+                controller.doLogin(LoginRequest(edt_email.text.toString(), edt_senha.text.toString()))
+            }else{
+                hideProgress()
+                makeSnackBar("Nenhuma conexão com a internet")
+            }
+        }
+
+        btn_quero_cadastrar.setOnClickListener {
+            startActivity(Intent(this, RegistrationActivity::class.java))
+        }
     }
 
     override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progress_bar_login.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        progress_bar_login.visibility = View.GONE
     }
 
     override fun sendToMainActivity(token: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //Salva o token antes de entrar
+        PreferencesService(this)
+                .saveStringPreference(resources.getString(R.string.token), token)
+        startActivity(Intent(this, MainActivity::class.java)
+                .putExtra(TAG_MESSAGE, "Bem-vindo(a)"))
+        finish()
     }
 
     override fun makeSnackBar(texto: String) {
@@ -51,7 +81,7 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
     }
 
     override fun onResponseFailure(throwable: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        makeSnackBar(throwable.message.toString())
     }
 
     companion object {

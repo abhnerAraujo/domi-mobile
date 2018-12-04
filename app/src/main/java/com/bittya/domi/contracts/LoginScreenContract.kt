@@ -4,7 +4,7 @@ import com.bittya.domi.models.LoginRequest
 
 interface LoginScreenContract {
 
-    interface presenter{
+    interface Presenter{
         fun doLogin(body: LoginRequest)
     }
 

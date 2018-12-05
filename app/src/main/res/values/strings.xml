@@ -9,9 +9,14 @@
     <string name="btn_quero_cadastrar">Quero me cadastrar</string>
 
     <string name="token">TOKEN</string>
-    <string name="reg_antes_comecar">Antes de começar, queremos te conhecer um pouco mais, para darmos a melhor experiência possível.</string>
+    <string name="reg_antes_comecar">Antes de começar, queremos saber um pouco sobre você e, assim, te dar a melhor experiência possível.</string>
     <string name="btn_continuar">Continuar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="passo_um">Passo 1</string>
+    <string name="info_dar_acesso">Primeiro vamos te dar um acesso</string>
+    <string name="hint_repetir_email">repetir email</string>
+    <string name="hint_repetir_senha">repetir senha</string>
+    <string name="btn_voltar">voltar</string>
 </resources>

@@ -2,31 +2,44 @@ package com.bittya.domi.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import com.bittya.domi.R
-import kotlinx.android.synthetic.main.fragment_registry_information.*
+import kotlinx.android.synthetic.main.fragment_user_credentials.*
 
-class RegistryInformationFragment : androidx.fragment.app.Fragment() {
-
+class RegistryCredentialsFragment : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_registry_information, container, false)
+        return inflater.inflate(R.layout.fragment_user_credentials, container, false)
     }
 
-    fun onContinuarPressed() {
-        listener?.onContinuarClicked()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        btn_continuar_to_personal.setOnClickListener {
+            onContinuarPressed()
+        }
+        btn_voltar_to_inicio.setOnClickListener {
+            onVoltarPressed()
+        }
+
+    }
+
+    private fun onContinuarPressed() {
+        listener?.onContinuarToPersonalInfoClicked()
+    }
+
+    private fun onVoltarPressed() {
+        listener?.onVoltarToInformationClicked()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
-            btn_inicio_continuar.setOnClickListener { onContinuarPressed() }
             listener = context
         } else {
             throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
@@ -38,25 +51,17 @@ class RegistryInformationFragment : androidx.fragment.app.Fragment() {
         listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
     interface OnFragmentInteractionListener {
-        fun onContinuarClicked()
+        fun onContinuarToPersonalInfoClicked()
+        fun onVoltarToInformationClicked()
     }
 
     companion object {
 
+        const val TAG = "RegistryCredentialsFragment"
+
         @JvmStatic
         fun newInstance() =
-                RegistryInformationFragment()
+                RegistryCredentialsFragment()
     }
 }

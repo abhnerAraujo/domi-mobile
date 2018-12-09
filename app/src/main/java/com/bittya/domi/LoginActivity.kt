@@ -3,12 +3,11 @@ package com.bittya.domi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.bittya.domi.contracts.AuthContract
 import com.bittya.domi.contracts.LoginScreenContract
 import com.bittya.domi.controllers.LoginScreenController
 import com.bittya.domi.models.LoginRequest
@@ -23,9 +22,10 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(resources.getString(R.string.tag_domi_activities), "Abrindo activity: ${this.javaClass.simpleName}")
         setContentView(R.layout.activity_login)
 
-        val message = intent.getStringExtra(TAG_MESSAGE)
+        val message = intent.getStringExtra(resources.getString(R.string.tag_mensagem))
         if(message != null){
             Toast.makeText(this, message, Toast.LENGTH_LONG)
                     .show()
@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
         edt_email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if(!Validacoes.isEmailValid(p0.toString())){
-                    edt_email.error = "Email inválido"
+                    edt_email.error = getString(R.string.info_email_invalido)
                 }
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -46,10 +46,11 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
             showProgress()
             if(ConnectionService.test(this)){
                 val controller = LoginScreenController(this, AuthIntractor())
-                controller.doLogin(LoginRequest(edt_email.text.toString(), edt_senha.text.toString()))
+                val request = LoginRequest(LoginRequest.User(edt_email.text.toString(), edt_senha.text.toString()))
+                controller.doLogin(request)
             }else{
                 hideProgress()
-                makeSnackBar("Nenhuma conexão com a internet")
+                makeSnackBar(getString(R.string.info_nenhuma_conexao_internet))
             }
         }
 
@@ -62,6 +63,7 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
         progress_bar_login.visibility = View.VISIBLE
     }
 
+
     override fun hideProgress() {
         progress_bar_login.visibility = View.GONE
     }
@@ -71,8 +73,13 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
         PreferencesService(this)
                 .saveStringPreference(resources.getString(R.string.token), token)
         startActivity(Intent(this, MainActivity::class.java)
-                .putExtra(TAG_MESSAGE, "Bem-vindo(a)"))
+                .putExtra(resources.getString(R.string.tag_mensagem), resources.getString(R.string.info_bem_vindo_a)))
         finish()
+    }
+
+    override fun makeToast(texto: String){
+        Toast.makeText(this, texto, Toast.LENGTH_LONG)
+                .show()
     }
 
     override fun makeSnackBar(texto: String) {
@@ -81,10 +88,13 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
     }
 
     override fun onResponseFailure(throwable: Throwable) {
+        Log.d(resources.getString(R.string.tag_domi_error), throwable.message)
         makeSnackBar(throwable.message.toString())
+        hideProgress()
     }
 
-    companion object {
-        const val TAG_MESSAGE = "MESSAGE"
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(getString(R.string.tag_domi_activities), "Finalizando activity: ${this.javaClass.simpleName}")
     }
 }

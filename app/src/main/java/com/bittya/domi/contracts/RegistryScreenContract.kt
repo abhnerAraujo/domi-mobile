@@ -2,13 +2,13 @@ package com.bittya.domi.contracts
 
 import com.bittya.domi.models.LoginRequest
 
-interface LoginScreenContract {
+interface RegistryScreenContract {
 
     interface Presenter{
-        fun doLogin(body: LoginRequest)
+        fun signUp(body: LoginRequest)
     }
 
-    interface LoginView{
+    interface RegistryView{
         fun showProgress()
         fun hideProgress()
         fun sendToMainActivity(token: String)

@@ -23,7 +23,6 @@ class AuthIntractor : AuthContract.GetAuthIntractor{
                 override fun onFailure(call: Call<ValidateTokenResponse>?, t: Throwable?) {
                     onFinishedValidateListener.onValidateFailure(t ?: Throwable("Erro ao tentar validar acesso"))
                 }
-
                 override fun onResponse(call: Call<ValidateTokenResponse>?, response: Response<ValidateTokenResponse>?) {
                     val arrayList = ArrayList<ValidateTokenResponse>()
                     response?.body()?.apply{
@@ -48,27 +47,25 @@ class AuthIntractor : AuthContract.GetAuthIntractor{
                 override fun onFailure(call: Call<LoginResponse>?, t: Throwable?) {
                     throw  Throwable(t ?: Throwable("Erro ao tentar validar acesso"))
                 }
-
                 override fun onResponse(call: Call<LoginResponse>?, response: Response<LoginResponse>?) {
                     val arrayList = ArrayList<LoginResponse>()
                     if(response?.isSuccessful == true){
-                        response.body().apply {
-                            val loginResponse = LoginResponse()
-                            loginResponse.message = this?.message
-                            loginResponse.success = this?.success
-                            loginResponse.token = this?.token
-                            arrayList.add(loginResponse)
+                        response.body()?.apply {
+                            Log.d("domi_request", this.message)
+                            arrayList.add(this)
                         }
                         onFinishedLoginListener.onLoginFinished(arrayList)
                     }else{
                         throw Throwable("Erro inesperado")
                     }
-
                 }
             })
         } catch (t: Throwable){
             onFinishedLoginListener.onLoginFailure(t)
         }
+    }
 
+    override fun signUp(body: LoginRequest, onFinishedSignUpListener: AuthContract.GetAuthIntractor.OnFinishedSignUpListener) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -9,6 +9,7 @@
     <string name="btn_quero_cadastrar">Quero me cadastrar</string>
 
     <string name="token">TOKEN</string>
+    <string name="tag_mensagem">MESSAGE</string>
     <string name="reg_antes_comecar">Antes de começar, queremos saber um pouco sobre você e, assim, te dar a melhor experiência possível.</string>
     <string name="btn_continuar">Continuar</string>
 
@@ -19,4 +20,29 @@
     <string name="hint_repetir_email">repetir email</string>
     <string name="hint_repetir_senha">repetir senha</string>
     <string name="btn_voltar">voltar</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="info_podemos_nos_apresentar">Pronto, já podemos nos apresentar</string>
+    <string name="passo_dois">Passo 2</string>
+    <string name="hint_seu_nome">seu nome</string>
+    <string name="hint_data_de_nascimento">data de nascimento</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="passo_tres">Passo 3</string>
+    <string name="falar_do_seu_trabalho">Muito bem, agora vamos falar do seu trabalho. Falta pouco agora</string>
+    <string name="hint_sua_profissao">sua profissão</string>
+    <string name="hint_seu_registro_conselho">seu registro no conselho</string>
+    <string name="hint_uf">UF</string>
+    <string name="btn_finalizar">Finalizar</string>
+    <string name="btn_comecar">Começar</string>
+    <string name="info_ja_cadastrado">Ótimo, você já está cadastrado e podemos começar. Não se esqueça de completar seu cadastro depois.</string>
+    <string name="tag_domi_activities">domi_activities</string>
+    <string name="info_bem_vindo_a">Bem-vindo(a)</string>
+    <string name="tag_domi_fragments">domi_fragments</string>
+    <string name="info_email_invalido">Email inválido</string>
+    <string name="info_nenhuma_conexao_internet">Nenhuma conexão com a internet</string>
+    <string name="tag_domi_error">domi_error</string>
+
+    <string-array name="sexos">
+        <item>Masculino</item>
+        <item>Feminino</item>
+    </string-array>
 </resources>

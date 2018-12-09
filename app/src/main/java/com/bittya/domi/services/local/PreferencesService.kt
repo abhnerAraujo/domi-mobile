@@ -9,6 +9,7 @@ class PreferencesService(context: Context) {
             Context.MODE_PRIVATE)
 
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     fun getStringSharedPreferenceByTag(tag: String): String{
         return sharedPreferences.getString(tag, "")
     }

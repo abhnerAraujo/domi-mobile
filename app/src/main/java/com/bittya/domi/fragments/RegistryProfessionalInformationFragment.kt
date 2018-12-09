@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 
 import com.bittya.domi.R
+import kotlinx.android.synthetic.main.fragment_user_professional_information.*
 
 class RegistryProfessionalInformationFragment : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
@@ -23,7 +25,7 @@ class RegistryProfessionalInformationFragment : androidx.fragment.app.Fragment()
     }
 
     fun onVoltarPressed() {
-        listener?.onContinuarToRegistryDoneClicked()
+        listener?.onVoltarToPersonalInfoClicked()
     }
 
     override fun onAttach(context: Context) {
@@ -42,7 +44,16 @@ class RegistryProfessionalInformationFragment : androidx.fragment.app.Fragment()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        btn_continuar_to_finalizar.setOnClickListener {
+            onFinishPressed()
+        }
+        btn_voltar_to_personal.setOnClickListener {
+            onVoltarPressed()
+        }
+        val fadeInMoveBack = AnimationUtils.loadAnimation(context, R.anim.fade_in_move_back)
+        fadeInMoveBack.reset()
+        tvw_passo_tres.startAnimation(fadeInMoveBack)
+        tvw_falar_do_seu_trabalho.startAnimation(fadeInMoveBack)
     }
 
     interface OnFragmentInteractionListener {

@@ -84,6 +84,7 @@
             style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:textColor="@color/white"
             android:text="@string/btn_entrar"
+            android:textSize="16sp"
             android:layout_marginTop="20dp"
             android:id="@+id/btn_entrar"/>
 
@@ -99,5 +100,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/btn_quero_cadastrar"
+        android:textSize="16sp"
         android:text="@string/btn_quero_cadastrar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

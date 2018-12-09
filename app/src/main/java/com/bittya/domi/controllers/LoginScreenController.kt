@@ -1,5 +1,7 @@
 package com.bittya.domi.controllers
 
+import android.util.Log
+import com.bittya.domi.R
 import com.bittya.domi.contracts.AuthContract
 import com.bittya.domi.contracts.LoginScreenContract
 import com.bittya.domi.models.LoginRequest
@@ -12,7 +14,9 @@ class LoginScreenController(private var login_screen: LoginScreenContract.LoginV
     override fun onLoginFinished(loginResponse: ArrayList<LoginResponse>) {
         if(loginResponse.size > 0){
             if(loginResponse[0].success == true){
-                login_screen.sendToMainActivity(loginResponse[0].token ?: "")
+                Log.d("domi_auth", "Login com token: ${loginResponse[0].data?.token}")
+                login_screen.makeToast(loginResponse[0].message ?: "Você entrou")
+                login_screen.sendToMainActivity(loginResponse[0].data?.token ?: "")
             } else {
                 onLoginFailure(Throwable(loginResponse[0].message))
             }
@@ -20,7 +24,7 @@ class LoginScreenController(private var login_screen: LoginScreenContract.LoginV
     }
 
     override fun onLoginFailure(t: Throwable) {
-        login_screen.makeSnackBar(t.message ?: "Erro inesperado")
+        login_screen.onResponseFailure(t)
     }
 
     override fun doLogin(body: LoginRequest) {

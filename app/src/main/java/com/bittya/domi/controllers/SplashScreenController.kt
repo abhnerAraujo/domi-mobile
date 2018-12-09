@@ -15,7 +15,7 @@ class SplashScreenController(private var splashScreenView: SplashScreenContract.
         this.splashScreenView = null
     }
 
-    override fun requestDataFromServer(authorization: String) {
+    override fun validateToken(authorization: String) {
         authIntractor.validateToken(authorization,this)
     }
 

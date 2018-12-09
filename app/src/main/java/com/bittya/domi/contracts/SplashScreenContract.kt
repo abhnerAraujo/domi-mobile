@@ -4,7 +4,7 @@ interface SplashScreenContract {
 
     interface presenter{
         fun onDestroy()
-        fun requestDataFromServer(authorization: String)
+        fun validateToken(authorization: String)
     }
 
     interface MainView{

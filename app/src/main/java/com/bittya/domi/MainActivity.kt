@@ -1,6 +1,7 @@
 package com.bittya.domi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.Menu
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(resources.getString(R.string.tag_domi_activities), "Abrindo activity: ${this.javaClass.simpleName}")
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
@@ -36,5 +38,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_atendimentos -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(resources.getString(R.string.tag_domi_activities), "Finalizando activity: ${this.javaClass.simpleName}")
     }
 }

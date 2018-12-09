@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 
 import com.bittya.domi.R
 import kotlinx.android.synthetic.main.fragment_user_credentials.*
@@ -23,10 +24,13 @@ class RegistryCredentialsFragment : androidx.fragment.app.Fragment() {
         btn_continuar_to_personal.setOnClickListener {
             onContinuarPressed()
         }
-        btn_voltar_to_inicio.setOnClickListener {
+        btn_voltar_to_login.setOnClickListener {
             onVoltarPressed()
         }
-
+        val fadeInMoveBack = AnimationUtils.loadAnimation(context, R.anim.fade_in_move_back)
+        fadeInMoveBack.reset()
+        tvw_passo_um.startAnimation(fadeInMoveBack)
+        tvw_get_credential.startAnimation(fadeInMoveBack)
     }
 
     private fun onContinuarPressed() {

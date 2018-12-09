@@ -20,6 +20,13 @@ interface AuthContract {
         }
 
         fun doLogin(body: LoginRequest, onFinishedLoginListener: OnFinishedLoginListener)
+
+        interface OnFinishedSignUpListener {
+            fun onSignUpFinished(loginResponse: ArrayList<LoginResponse>)
+            fun onSignUpFailure(t: Throwable)
+        }
+
+        fun signUp(body: LoginRequest, onFinishedSignUpListener: OnFinishedSignUpListener)
     }
 
 

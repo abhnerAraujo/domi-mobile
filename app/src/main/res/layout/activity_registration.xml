@@ -8,5 +8,18 @@
     android:background="@color/colorPrimary"
     android:id="@+id/container_registro">
 
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress_bar_registry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:mpb_indeterminateTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:indeterminate="true"
+        app:mpb_progressStyle="circular"
+        android:visibility="visible"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

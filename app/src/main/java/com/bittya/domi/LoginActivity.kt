@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.Toast
 import com.bittya.domi.contracts.LoginScreenContract
 import com.bittya.domi.controllers.LoginScreenController
-import com.bittya.domi.models.LoginRequest
+import com.bittya.domi.models.moni.LoginRequest
 import com.bittya.domi.services.intractors.AuthIntractor
 import com.bittya.domi.services.local.ConnectionService
 import com.bittya.domi.services.local.PreferencesService
@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity(), LoginScreenContract.LoginView {
         edt_email.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 if(!Validacoes.isEmailValid(p0.toString())){
-                    edt_email.error = getString(R.string.info_email_invalido)
+                    edt_email.error = getString(R.string.error_email_invalido)
                 }
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

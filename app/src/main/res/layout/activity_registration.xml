@@ -20,6 +20,9 @@
         android:visibility="visible"
         style="@style/Widget.MaterialProgressBar.ProgressBar.Small"
         />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
-package com.bittya.domi.models
+package com.bittya.domi.models.moni
 
 import com.google.gson.annotations.SerializedName
 
-class LoginResponse {
+class ValidateTokenResponse {
     @SerializedName("success")
     var success: Boolean? = null
     @SerializedName("message")

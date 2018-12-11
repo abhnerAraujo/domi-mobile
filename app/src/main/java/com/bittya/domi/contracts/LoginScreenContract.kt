@@ -1,6 +1,6 @@
 package com.bittya.domi.contracts
 
-import com.bittya.domi.models.LoginRequest
+import com.bittya.domi.models.moni.LoginRequest
 
 interface LoginScreenContract {
 

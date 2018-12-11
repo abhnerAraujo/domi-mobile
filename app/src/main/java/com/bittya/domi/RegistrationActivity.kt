@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bittya.domi.contracts.RegistryScreenContract
+import com.bittya.domi.controllers.RegistryScreenController
 import com.bittya.domi.fragments.*
+import com.bittya.domi.models.data.RegistroUsuario
+import com.bittya.domi.services.intractors.AuthIntractor
 import com.bittya.domi.services.local.PreferencesService
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_registration.*
@@ -27,6 +30,8 @@ class RegistrationActivity : AppCompatActivity()
     private val personalInformationFragment = RegistryPersonalInformationFragment.newInstance()
     private val professionalInformationFragment = RegistryProfessionalInformationFragment.newInstance()
 
+    private val registroUsuario = RegistroUsuario()
+
     override fun onContinuarToCredentialsClicked() {
         showFragment(credentialsFragment ,RegistryCredentialsFragment.TAG)
     }
@@ -35,8 +40,10 @@ class RegistrationActivity : AppCompatActivity()
         showFragment(beforeStartFragment, RegistryBeforeStartFragment.TAG)
     }
 
-    override fun onContinuarToPersonalInfoClicked() {
-        showFragment(personalInformationFragment, RegistryPersonalInformationFragment.TAG)
+    override fun onContinuarToPersonalInfoClicked(usuario: RegistroUsuario.Usuario) {
+        val controller = RegistryScreenController(this, AuthIntractor())
+        controller.signUp(usuario)
+        registroUsuario.usuario = usuario
     }
 
     override fun onContinuarToProfessionalInfoClicked() {
@@ -65,7 +72,11 @@ class RegistrationActivity : AppCompatActivity()
         Log.d(resources.getString(R.string.tag_domi_activities), "Abrindo activity: ${this.javaClass.simpleName}")
         setContentView(R.layout.activity_registration)
 
-        showFragment(beforeStartFragment ,RegistryBeforeStartFragment.TAG)
+        if(PreferencesService(this).getStringSharedPreferenceByTag(resources.getString(R.string.token)) == ""){
+            showFragment(beforeStartFragment ,RegistryBeforeStartFragment.TAG)
+        } else {
+            showFragment(personalInformationFragment ,RegistryPersonalInformationFragment.TAG)
+        }
 
     }
 
@@ -96,10 +107,7 @@ class RegistrationActivity : AppCompatActivity()
         progress_bar_registry.visibility = View.GONE
     }
 
-    override fun sendToMainActivity(token: String) {
-        //Salva o token antes de entrar
-        PreferencesService(this)
-                .saveStringPreference(resources.getString(R.string.token), token)
+    override fun sendToMainActivity() {
         startActivity(Intent(this, MainActivity::class.java)
                 .putExtra(resources.getString(R.string.tag_mensagem), getString(R.string.info_bem_vindo_a)))
         finish()
@@ -118,6 +126,14 @@ class RegistrationActivity : AppCompatActivity()
     override fun onResponseFailure(throwable: Throwable) {
         makeSnackBar(throwable.message.toString())
         hideProgress()
+        finish()
+    }
+
+    override fun openPersonalInformationFragment(usuario: RegistroUsuario.Usuario) {
+        //Salva o token antes de entrar
+        PreferencesService(this)
+                .saveStringPreference(resources.getString(R.string.token), usuario.token)
+        showFragment(personalInformationFragment, RegistryPersonalInformationFragment.TAG)
     }
 
     override fun onDestroy() {

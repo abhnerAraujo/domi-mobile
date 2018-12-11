@@ -14,7 +14,7 @@ class Validacoes {
         }
 
         fun isPasswordValid(senha: String): Boolean {
-            val matches = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{8,}"
+            val matches = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+\$).{6,}"
             return matches.toRegex().matches(senha)
         }
     }

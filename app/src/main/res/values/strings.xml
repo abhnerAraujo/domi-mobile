@@ -37,9 +37,13 @@
     <string name="tag_domi_activities">domi_activities</string>
     <string name="info_bem_vindo_a">Bem-vindo(a)</string>
     <string name="tag_domi_fragments">domi_fragments</string>
-    <string name="info_email_invalido">Email inválido</string>
     <string name="info_nenhuma_conexao_internet">Nenhuma conexão com a internet</string>
     <string name="tag_domi_error">domi_error</string>
+    <string name="tag_sessao_expirou">Sua sessão expirou</string>
+    <string name="error_senhas_diferentes">As senhas fornecidas devem ser iguais</string>
+    <string name="error_email_diferentes">Os e-mails fornecidos devem ser iguais</string>
+    <string name="error_email_invalido">Email inválido</string>
+    <string name="error_senha_padrao_errado">Deve conter: Letras maiúsculas e minúsculas e números</string>
 
     <string-array name="sexos">
         <item>Masculino</item>

@@ -1,11 +1,10 @@
 package com.bittya.domi.controllers
 
 import android.util.Log
-import com.bittya.domi.R
 import com.bittya.domi.contracts.AuthContract
 import com.bittya.domi.contracts.LoginScreenContract
-import com.bittya.domi.models.LoginRequest
-import com.bittya.domi.models.LoginResponse
+import com.bittya.domi.models.moni.LoginRequest
+import com.bittya.domi.models.moni.LoginResponse
 
 class LoginScreenController(private var login_screen: LoginScreenContract.LoginView, private var authIntractor: AuthContract.GetAuthIntractor)
     : AuthContract.GetAuthIntractor.OnFinishedLoginListener

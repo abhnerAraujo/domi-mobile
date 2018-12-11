@@ -13,7 +13,7 @@ class RetroClient (baseUrl: String){
     companion object {
         private val httpClient = OkHttpClient.Builder()
 
-        var builder = Retrofit.Builder()
+        private val builder = Retrofit.Builder()
                 .baseUrl(BuildConfig.Base_URL)
                 .addConverterFactory(GsonConverterFactory.create())
 

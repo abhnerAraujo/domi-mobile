@@ -44,6 +44,7 @@ class SplashActivity : AppCompatActivity(), SplashScreenContract.MainView {
     }
 
     override fun sendToLoginActivity(message: String?) {
+        PreferencesService(this).saveStringPreference(resources.getString(R.string.token), "")
         startActivity(Intent(this, LoginActivity::class.java).apply {
             this.putExtra(resources.getString(R.string.tag_mensagem), message)
         }).also { finish() }

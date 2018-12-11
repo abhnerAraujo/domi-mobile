@@ -2,9 +2,7 @@ package com.bittya.domi.services.intractors
 
 import android.util.Log
 import com.bittya.domi.contracts.AuthContract
-import com.bittya.domi.models.LoginRequest
-import com.bittya.domi.models.LoginResponse
-import com.bittya.domi.models.ValidateTokenResponse
+import com.bittya.domi.models.moni.*
 import com.bittya.domi.services.remote.AuthService
 import com.bittya.domi.services.remote.RetroClient
 import retrofit2.Call
@@ -26,7 +24,7 @@ class AuthIntractor : AuthContract.GetAuthIntractor{
                 override fun onResponse(call: Call<ValidateTokenResponse>?, response: Response<ValidateTokenResponse>?) {
                     val arrayList = ArrayList<ValidateTokenResponse>()
                     response?.body()?.apply{
-                        if(this.data?.valid == true){
+                        if(this.success == true){
                             Log.d("domi_response", this.message)
                         }
                         arrayList.add(this)
@@ -65,7 +63,30 @@ class AuthIntractor : AuthContract.GetAuthIntractor{
         }
     }
 
-    override fun signUp(body: LoginRequest, onFinishedSignUpListener: AuthContract.GetAuthIntractor.OnFinishedSignUpListener) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun signUp(body: SignUpRequest, onFinishedSignUpListener: AuthContract.GetAuthIntractor.OnFinishedSignUpListener) {
+        try {
+            Log.d("domi_teste", "Signup")
+            val service = RetroClient.createService(AuthService::class.java)
+            val call = service.signup(body)
+            call.enqueue(object: Callback<SignUpResponse> {
+                override fun onFailure(call: Call<SignUpResponse>?, t: Throwable?) {
+                    throw  Throwable(t ?: Throwable("Erro no cadastro do usuário"))
+                }
+                override fun onResponse(call: Call<SignUpResponse>?, response: Response<SignUpResponse>?) {
+                    val arrayList = ArrayList<SignUpResponse>()
+                    if(response?.isSuccessful == true){
+                        response.body()?.apply {
+                            Log.d("domi_request", this.message)
+                            arrayList.add(this)
+                        }
+                        onFinishedSignUpListener.onSignUpFinished(arrayList)
+                    }else{
+                        throw Throwable("Erro inesperado")
+                    }
+                }
+            })
+        } catch (t: Throwable){
+            onFinishedSignUpListener.onSignUpFailure(t)
+        }
     }
 }

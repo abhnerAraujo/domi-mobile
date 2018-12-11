@@ -1,8 +1,6 @@
 package com.bittya.domi.contracts
 
-import com.bittya.domi.models.LoginRequest
-import com.bittya.domi.models.LoginResponse
-import com.bittya.domi.models.ValidateTokenResponse
+import com.bittya.domi.models.moni.*
 
 interface AuthContract {
     interface GetAuthIntractor {
@@ -22,11 +20,11 @@ interface AuthContract {
         fun doLogin(body: LoginRequest, onFinishedLoginListener: OnFinishedLoginListener)
 
         interface OnFinishedSignUpListener {
-            fun onSignUpFinished(loginResponse: ArrayList<LoginResponse>)
+            fun onSignUpFinished(signUpResponse: ArrayList<SignUpResponse>)
             fun onSignUpFailure(t: Throwable)
         }
 
-        fun signUp(body: LoginRequest, onFinishedSignUpListener: OnFinishedSignUpListener)
+        fun signUp(body: SignUpRequest, onFinishedSignUpListener: OnFinishedSignUpListener)
     }
 
 
